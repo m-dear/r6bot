@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>r6bot_driver</name>
+  <version>0.1.0</version>
+  <description>
+    ros2_control hardware interface for the R6Bot 6-DOF arm.
+    Streams joint position commands and receives joint states.
+    Includes a Python robot simulator for development without hardware.
+    See CLAUDE.md for the continuous-streaming architecture.
+  </description>
+
+  <maintainer email="dear.moeurn2912@gmail.com">Robot Developer</maintainer>
+  <license>Apache-2.0</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+  <buildtool_depend>ros2_control_cmake</buildtool_depend>
+
+  <!-- Build and link dependencies -->
+  <depend>hardware_interface</depend>
+  <depend>pluginlib</depend>
+  <depend>realtime_tools</depend>
+  <depend>rclcpp</depend>
+  <depend>rclcpp_lifecycle</depend>
+  <depend>backward_ros</depend>
+  <depend>controller_manager</depend>
+
+  <!-- Runtime dependencies (not needed to compile, but needed to run) -->
+  <exec_depend>joint_state_broadcaster</exec_depend>
+  <exec_depend>joint_trajectory_controller</exec_depend>
+  <exec_depend>r6bot_description</exec_depend>
+  <exec_depend>robot_state_publisher</exec_depend>
+  <exec_depend>rviz2</exec_depend>
+  <exec_depend>xacro</exec_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>

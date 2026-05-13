@@ -1,0 +1,12 @@
+<library path="r6bot_driver">
+  <class
+    name="r6bot_driver/R6botHardware"
+    type="r6bot_driver::R6botHardware"
+    base_class_type="hardware_interface::SystemInterface">
+    <description>
+      Hardware interface for the R6Bot 6-DOF arm.
+      Streams joint position commands and receives joint states.
+      See CLAUDE.md for the continuous-streaming architecture.
+    </description>
+  </class>
+</library>

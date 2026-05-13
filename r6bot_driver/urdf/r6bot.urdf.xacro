@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<!--
+  r6bot.urdf.xacro
+  ════════════════
+  Full robot description for the R6Bot 6-DOF arm.
+
+  USAGE
+    # Connect to the Python simulator (default)
+    xacro r6bot.urdf.xacro
+
+    # Connect to a real robot on the network
+    xacro r6bot.urdf.xacro robot_ip:=192.168.1.100
+
+  ARGUMENTS
+    robot_ip       IP of the robot or simulator      (default: 127.0.0.1)
+    robot_port     Command port                       (default: 30000)
+    local_port     State-reply port on this PC        (default: 30001)
+-->
+<robot name="r6bot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!-- Import the visual/collision mesh robot and ros2_control hardware macros -->
+  <xacro:include filename="$(find r6bot_description)/urdf/r6bot_description.urdf.xacro"/>
+  <xacro:include filename="$(find r6bot_driver)/ros2_control/r6bot_hardware.ros2_control.xacro"/>
+
+  <!-- ── Arguments ──────────────────────────────────────────────────────── -->
+  <xacro:arg name="robot_ip"      default="127.0.0.1"/>
+  <xacro:arg name="robot_port"    default="30000"/>
+  <xacro:arg name="local_port"    default="30001"/>
+
+  <!-- ── World link (fixed reference frame) ────────────────────────────── -->
+  <link name="world"/>
+
+  <!-- ── Mesh robot description ────────────────────────────────────────── -->
+  <xacro:r6bot_description/>
+
+  <!-- ── ros2_control hardware block ──────────────────────────────────── -->
+  <!--
+    This macro inserts the <ros2_control> XML that tells controller_manager
+    which plugin to load and how to connect to the robot.
+    Change robot_ip to point at your real robot instead of the simulator.
+  -->
+  <xacro:r6bot_hardware_ros2_control
+    name="r6bot"
+    robot_ip="$(arg robot_ip)"
+    robot_port="$(arg robot_port)"
+    local_port="$(arg local_port)"
+  />
+
+</robot>

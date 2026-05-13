@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!--
+  Top-level R6Bot description for RViz and MoveIt Setup Assistant.
+
+  Load this file, not r6bot_description.urdf.xacro. The latter only defines
+  the reusable xacro macro used by this robot instance.
+-->
+<robot name="r6bot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:include filename="$(find r6bot_description)/urdf/r6bot_description.urdf.xacro"/>
+
+  <link name="world"/>
+
+  <xacro:r6bot_description/>
+
+</robot>

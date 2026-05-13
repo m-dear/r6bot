@@ -1,0 +1,59 @@
+# r6bot_controllers.yaml
+# ════════════════════════
+# Controller parameters for the R6Bot 6-DOF arm.
+#
+# Two controllers are loaded:
+#
+#   joint_state_broadcaster  — publishes /joint_states so RViz and
+#                              robot_state_publisher can display the robot.
+#                              Always required.
+#
+#   joint_trajectory_controller — accepts JointTrajectory goals from MoveIt.
+#                              Interpolates sparse waypoints into a dense
+#                              position stream and calls write() at the
+#                              controller_manager update rate.
+#                              See CLAUDE.md for the full pipeline.
+
+controller_manager:
+  ros__parameters:
+    update_rate: 100  # Hz — ros2_control main loop rate
+
+    joint_state_broadcaster:
+      type: joint_state_broadcaster/JointStateBroadcaster
+
+    joint_trajectory_controller:
+      type: joint_trajectory_controller/JointTrajectoryController
+
+# ── joint_trajectory_controller configuration ────────────────────────────────
+joint_trajectory_controller:
+  ros__parameters:
+    joints:
+      - joint_1
+      - joint_2
+      - joint_3
+      - joint_4
+      - joint_5
+      - joint_6
+
+    # The hardware exposes a position command interface
+    command_interfaces:
+      - position
+
+    # The hardware exposes position, velocity, and effort state interfaces
+    state_interfaces:
+      - position
+      - velocity
+
+    # Publish the current trajectory state for monitoring
+    state_publish_rate: 50.0   # Hz
+
+    # Action server settings
+    action_monitor_rate: 20.0  # Hz
+
+    # Allow partial joint goals (useful for testing individual joints)
+    allow_partial_joints_goal: false
+
+    # Tolerate small velocity residuals at goal
+    constraints:
+      stopped_velocity_tolerance: 0.01  # rad/s
+      goal_time: 0.6                    # seconds allowed past trajectory end

@@ -1,0 +1,25 @@
+moveit_setup_assistant_config:
+  urdf:
+    package: r6bot_description
+    relative_path: urdf/r6bot.urdf.xacro
+  srdf:
+    relative_path: config/r6bot.srdf
+  package_settings:
+    author_name: ""
+    author_email: ""
+    generated_timestamp: 1777958405
+  control_xacro:
+    command:
+      - position
+    state:
+      - position
+      - velocity
+  modified_urdf:
+    xacros:
+      - control_xacro
+  control_xacro:
+    command:
+      - position
+    state:
+      - position
+      - velocity
